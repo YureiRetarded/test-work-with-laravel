@@ -3,8 +3,7 @@
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MyPlaceController;
-use App\Http\Controllers\MyPlaceController2;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,12 +19,8 @@ use App\Http\Controllers\MyPlaceController2;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test1', function () {
-    return 'TEST1';
-});
-Route::get('/test2', function () {
-    return 'TEST2';
-});
-Route::get('/test3',  [MyPlaceController::class, 'index']);
-Route::get('/test4', [MyPlaceController::class, 'noindex']);
-Route::get('/test5', [MyPlaceController2::class, 'qwerty']);
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/create', [PostController::class, 'create']);
+Route::get('/posts/update', [PostController::class, 'update']);
+Route::get('/posts/delete', [PostController::class, 'delete']);
+Route::get('/posts/firstOrCreate', [PostController::class, 'firstOrCreate']);

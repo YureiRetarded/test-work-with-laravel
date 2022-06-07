@@ -53,19 +53,26 @@ class PostController extends Controller
     }
     public function firstOrCreate()
     {
-        $anotherPost = [
-            'title' => 'Test title',
-            'content' => 'awdawdawd!',
-            'image' => 'none',
-            'likes' => 0,
-            'is_published' => 1
-        ];
-
         $post = Post::firstOrCreate(
             ['title' => 'ssssss title'],
             [
                 'title' => 'ssssss title',
                 'content' => 'awdawdawd!',
+                'image' => 'none',
+                'likes' => 0,
+                'is_published' => 1
+            ]
+        );
+        dump($post->content);
+        dd('end');
+    }
+    public function updateOrCreate()
+    {
+        $post = Post::updateOrCreate(
+            ['title' => 'wwwwww title'],
+            [
+                'title' => 'wwwwww title',
+                'content' => 'wwwwww!',
                 'image' => 'none',
                 'likes' => 0,
                 'is_published' => 1

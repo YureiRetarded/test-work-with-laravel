@@ -16,10 +16,11 @@ use App\Http\Controllers\PostController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/posts', [PostController::class, 'index']);
+
+Route::get('/', [PostController::class, 'index'])->name('post.index');
+Route::get('/about', [PostController::class, 'about'])->name('post.about');
+Route::get('/list', [PostController::class, 'list'])->name('post.list');
+Route::get('/contact', [PostController::class, 'contact'])->name('post.contact');
 Route::get('/posts/create', [PostController::class, 'create']);
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);

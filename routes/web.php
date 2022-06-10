@@ -20,6 +20,8 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+
 //List
 Route::get('/list', [ListController::class, 'index'])->name('list.index');
 
@@ -30,6 +32,11 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
 //Post
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
-Route::get('/post', [PostController::class, 'index'])->name('post.index');
-Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+
+Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');

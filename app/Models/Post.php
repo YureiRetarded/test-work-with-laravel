@@ -12,4 +12,8 @@ class Post extends Model
     use SoftDeletes;
     protected $table = 'posts';
     protected $guarded = [];
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
 }

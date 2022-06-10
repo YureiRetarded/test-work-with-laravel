@@ -4,6 +4,10 @@ use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ListController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +20,23 @@ use App\Http\Controllers\PostController;
 |
 */
 
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
-Route::get('/', [PostController::class, 'index'])->name('post.index');
-Route::get('/about', [PostController::class, 'about'])->name('post.about');
-Route::get('/list', [PostController::class, 'list'])->name('post.list');
-Route::get('/contact', [PostController::class, 'contact'])->name('post.contact');
-Route::get('/posts/create', [PostController::class, 'create']);
-Route::get('/posts/update', [PostController::class, 'update']);
-Route::get('/posts/delete', [PostController::class, 'delete']);
-Route::get('/posts/firstOrCreate', [PostController::class, 'firstOrCreate']);
-Route::get('/posts/updateOrCreate', [PostController::class, 'updateOrCreate']);
+//List
+Route::get('/list', [ListController::class, 'index'])->name('list.index');
+
+//About
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+
+//Contact
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+
+//Post
+
+Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');

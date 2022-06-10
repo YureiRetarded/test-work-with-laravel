@@ -1,7 +1,14 @@
 @extends('layouts.main')
 @section('content')
 <div class="container">
-    <table class="table table-dark table-striped">
+    <a href="{{route('post.index')}}" class="btn btn-dark" role="button">Back</a>
+    <a href="{{route('post.edit',$post->id)}}" class="btn btn-dark" role="button">Edit</a>
+    <form action="{{route('post.delete',$post->id)}}" method="post">
+        @csrf
+        @method('delete')
+        <button type="submit" class="btn btn-danger mb-3 mt-3" role="button">Delete</button>
+    </form>
+    <table class="table table-dark table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -12,7 +19,6 @@
             </tr>
         </thead>
         <tbody>
-            @foreach($posts as $post)
                 <tr>
                     <th scope="col">{{$post->id}}</td>
                     <th scope="col">{{$post->title}}</td>
@@ -20,7 +26,6 @@
                     <th scope="col">{{$post->image}}</td>
                     <th scope="col">{{$post->likes}}</td>
                 </tr>
-            @endforeach
         </tbody>
         </table>
 </div>

@@ -8,12 +8,13 @@
     <title>Много текста</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container mb-3 mt-3">
         <div class="row">
             <div class="col"><a class="btn btn-dark" role="button" href="{{route('post.index')}}">Posts</a></div>
-            <div class="col"><a class="btn btn-dark" role="button" href="{{route('post.list')}}">List</a></div>
-            <div class="col"><a class="btn btn-dark" role="button" href="{{route('post.contact')}}">Contact</a></div> 
-            <div class="col"><a class="btn btn-dark" role="button" href="{{route('post.about')}}">About</a> </div>
+            <div class="col"><a class="btn btn-dark" role="button" href="{{route('post.create')}}">Create</a></div>
+            <div class="col"><a class="btn btn-dark" role="button" href="{{route('list.index')}}">List</a></div>
+            <div class="col"><a class="btn btn-dark" role="button" href="{{route('contact.index')}}">Contact</a></div> 
+            <div class="col"><a class="btn btn-dark" role="button" href="{{route('about.index')}}">About</a> </div>
         </div>
     </div>
     <div>

@@ -22,7 +22,7 @@
                 <tr>
                     <th scope="col">{{$post->id}}</td>
                     <th scope="col">{{$post->title}}</td>
-                    <th scope="col">{{$post->content}}</td>
+                    <th scope="col">{{$post->post_content}}</td>
                     <th scope="col">{{$post->image}}</td>
                     <th scope="col">{{$post->likes}}</td>
                 </tr>

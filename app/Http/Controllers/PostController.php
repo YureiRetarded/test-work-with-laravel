@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreRequest;
+use App\Http\Requests\UpdateRequest;
+use App\Http\Requests\FilterRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
@@ -9,9 +12,21 @@ use App\Models\Tag;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(FilterRequest $request)
     {
-        $posts = Post::all();
+        $data = $request->validated();
+        $query = Post::query();
+        // if (isset($data['category_id']))
+        //     $query->where('category_id', $data['category_id']);
+        // if (isset($data['title']))
+        //     $query->where('title', 'like', "%{$data['title']}%");
+        // if (isset($data['post_content']))
+        //     $query->where('post_content', 'like', "%{$data['post_content']}%");
+        $posts = $query->get();
+
+        dd($posts);
+        $posts = Post::paginate(15);
+
         return view('post.index', compact('posts'));
     }
 
@@ -21,15 +36,9 @@ class PostController extends Controller
         $tags = Tag::all();
         return  view('post.create', compact('catogories', 'tags'));
     }
-    public function store()
+    public function store(StoreRequest $request)
     {
-        $data = request()->validate([
-            'title' => 'required|string',
-            'post_content' => 'required|string',
-            'image' => 'required|string',
-            'category_id' => '',
-            'tags' => '',
-        ]);
+        $data = $request->validated();
         $tags = $data['tags'];
         unset($data['tags']);
         $post = Post::create($data);
@@ -46,15 +55,9 @@ class PostController extends Controller
         $tags = Tag::all();
         return view('post.edit', compact('post', 'catogories', 'tags'));
     }
-    public function update(Post $post)
+    public function update(UpdateRequest $request, Post $post)
     {
-        $data = request()->validate([
-            'title' => 'string',
-            'post_content' => 'string',
-            'image' => 'string',
-            'category_id' => '',
-            'tags' => '',
-        ]);
+        $data = $request->validated();
         $tags = $data['tags'];
         unset($data['tags']);
 

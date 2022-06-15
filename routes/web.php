@@ -7,7 +7,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ListController;
-use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\Admin\Post\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +20,18 @@ use App\Http\Controllers\WelcomeController;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 
 //List
 Route::get('/list', [ListController::class, 'index'])->name('list.index');
 
 //About
-Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+    Route::group(['namespace' => 'Post'], function () {
+        Route::get('/post', [IndexController::class, 'index'])->name('admin.post.index');
+    });
+});
+
 
 //Contact
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\PostFilter;
 use App\Http\Requests\StoreRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Http\Requests\FilterRequest;
@@ -15,18 +16,8 @@ class PostController extends Controller
     public function index(FilterRequest $request)
     {
         $data = $request->validated();
-        $query = Post::query();
-        // if (isset($data['category_id']))
-        //     $query->where('category_id', $data['category_id']);
-        // if (isset($data['title']))
-        //     $query->where('title', 'like', "%{$data['title']}%");
-        // if (isset($data['post_content']))
-        //     $query->where('post_content', 'like', "%{$data['post_content']}%");
-        $posts = $query->get();
-
-        dd($posts);
-        $posts = Post::paginate(15);
-
+        $filter = app()->make(PostFilter::class, ['queryParams' => array_filter($data)]);
+        $posts = Post::filter($filter)->paginate(15);
         return view('post.index', compact('posts'));
     }
 

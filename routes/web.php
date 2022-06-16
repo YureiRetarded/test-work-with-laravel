@@ -26,7 +26,7 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/list', [ListController::class, 'index'])->name('list.index');
 
 //About
-Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::group(['namespace' => 'Post'], function () {
         Route::get('/post', [IndexController::class, 'index'])->name('admin.post.index');
     });
@@ -45,3 +45,7 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
 Route::delete('/posts/{post}', [PostController::class, 'delete'])->name('post.delete');
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

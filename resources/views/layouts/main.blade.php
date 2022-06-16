@@ -15,6 +15,9 @@
             <div class="col"><a class="btn btn-dark" role="button" href="{{route('list.index')}}">List</a></div>
             <div class="col"><a class="btn btn-dark" role="button" href="{{route('contact.index')}}">Contact</a></div> 
             <div class="col"><a class="btn btn-dark" role="button" href="{{route('about.index')}}">About</a> </div>
+            @can('view',auth()->user())
+            <div class="col"><a class="btn btn-dark" role="button" href="{{route('admin.post.index')}}">Admin</a> </div>
+            @endcan
         </div>
     </div>
     <div>
